@@ -1,0 +1,6 @@
+Lib/Debug/*
+Lib/Release/*
+*.obj
+*.o
+*.exe
+*.out

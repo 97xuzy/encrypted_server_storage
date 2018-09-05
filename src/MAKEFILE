@@ -1,0 +1,31 @@
+# For NMAKE and MSVC tool chain
+CXX=CL
+CXXFLAGS=/c /EHsc /Wall
+OBJ_FILE_OUPUT_OPTION=/Fo:
+RM=del
+BUILD_VER=Release
+BUILD_ARCH=Win32
+
+cryptlib=../cryptopp-CRYPTOPP_7_0_0/$(BUILD_ARCH)/Output/$(BUILD_VER)/cryptlib.lib
+
+a.exe: $(cryptlib) main.obj password_hash.obj
+	LINK $** /OUT:$@
+
+main.obj: main.cpp
+	$(CXX) $(CXXFLAGS) $? $(OBJ_FILE_OUPUT_OPTION)$@
+
+password_hash.obj: password_hash.cpp
+	$(CXX) $(CXXFLAGS) $? $(OBJ_FILE_OUPUT_OPTION)$@
+
+network_client.obj: network_client.cpp
+	$(CXX) $(CXXFLAGS) $? $(OBJ_FILE_OUPUT_OPTION)$@
+
+../cryptopp-CRYPTOPP_7_0_0/$(BUILD_ARCH)/Output/$(BUILD_VER)/cryptlib.lib:
+
+clean:
+	$(RM) main.obj
+	$(RM) password_hash.obj
+	$(RM) network_client.obj
+	$(RM) a.exe
+
+
